@@ -8,11 +8,15 @@ const ListadoEventos = (props) => {
   const [events, setEvents] = useState([]);
 
 
-  const [showEventsModal, setShowEventsModal ] = useState(true);
+  const [showEventsModal, setShowEventsModal ] = useState(false);
 
   const handleHideEventsModal = ()=>{
-      alert('CERRAR');
+      setShowEventsModal(false);
   }
+
+const onShowEventsModal = ()=>{
+  setShowEventsModal(true);
+}
 
   let endpoint = 'events';
 
@@ -34,7 +38,7 @@ const ListadoEventos = (props) => {
   return (
       <>
       { props.type === 'miseventos' && 
-      <NavBarMisEventos/> }
+      <NavBarMisEventos handleShowEventsModal={onShowEventsModal}/> }
 
     <Row className="m-4">
 
