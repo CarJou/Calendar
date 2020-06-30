@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import CardEvent from "./CardEvent";
+import NavBarMisEventos from './NavBarMisEventos';
+import EventsModal from './EventsModal'
 
-const ListadoEventos = () => {
+const ListadoEventos = (props) => {
   const [events, setEvents] = useState([]);
 
+
+  const [showEventsModal, setShowEventsModal ] = useState(true);
+
+  const handleHideEventsModal = ()=>{
+      alert('CERRAR');
+  }
+
+  let endpoint = 'events';
+
+  if ( props.user && props.type === 'miseventos'){
+      endpoint = 'events/user/' + props.user.id;
+  }
+
+
   useEffect(() => {
-    fetch("http://localhost:8888/events")
-      .then((response) => response.json())
+
+    fetch(`http://localhost:8888/${endpoint}`)
+   .then((response) => response.json())
       .then((data) => {
         setEvents(data);
       });
@@ -15,6 +32,10 @@ const ListadoEventos = () => {
   );
 
   return (
+      <>
+      { props.type === 'miseventos' && 
+      <NavBarMisEventos/> }
+
     <Row className="m-4">
 
       {
@@ -27,6 +48,7 @@ const ListadoEventos = () => {
         descripcion={events.descripcion}
         participantes={events.participantes}
         id={events.id}
+        type={props.type}
       />
           )
       }
@@ -35,6 +57,15 @@ const ListadoEventos = () => {
 
       
     </Row>
+
+
+    <EventsModal show={showEventsModal}
+    handleHide={handleHideEventsModal}
+    />
+
+
+    </>
+
   );
 };
 export default ListadoEventos;

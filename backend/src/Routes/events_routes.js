@@ -31,7 +31,22 @@ router.get('/', (req, res) => {
     res.json(events);
 })
 
-router.get('/:id', (req, res) => {
+
+router.get('/user/:id', (req, res) => {
+
+    const eventosUsuario = [  
+    {
+        id: 2,
+            titulo: "Dentista",
+            descripcion: "Ir al abasto",
+            participantes: "Pablo"
+    }
+    ]
+    res.json(eventosUsuario);
+})
+
+
+/*router.get('/:id', (req, res) => {
     
     let events =  productos.filter( events => events.id == req.params.id );
                     
@@ -42,5 +57,6 @@ router.get('/:id', (req, res) => {
     res.json(events);
 
 })
+*/
 
 module.exports = router;

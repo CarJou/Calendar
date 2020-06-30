@@ -2,7 +2,13 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import save from '../save.png';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 
 
 export default (props) => 
@@ -10,14 +16,16 @@ export default (props) =>
         md={4}
         lg={3}
         xl={2}
-        className="mb-4 d-flex align-items-stretch justify-content-center"
+        className="mb-4 text-center d-flex align-items-stretch justify-content-center"
       >
         <Card>
+
           <Card.Body>
+            { props.type === 'eventos' &&
              <a className="nav-link p-0 text-right">
                  <img src={save}></img>
              </a>
-
+}
 
 
             
@@ -49,7 +57,18 @@ export default (props) =>
 
           <Card.Footer className="text-center"></Card.Footer>
 
-         
+         { props.type === 'miseventos' &&
+          <Row className="my-2">
+          <Col>
+              <Button className="m-2" variant="light">
+                  <FontAwesomeIcon color="green" icon={faEdit} />
+              </Button>
+
+              <Button className="m-2" variant="light">
+                  <FontAwesomeIcon color="red" icon={faTrash} />
+              </Button>
+          </Col>
+      </Row>
+         }
         </Card>
       </Col>
-    //<Link to={"/events/" + props.id} className="nav-link p-0"> 

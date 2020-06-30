@@ -16,9 +16,28 @@ import {
 function App() {
 
   const [usuario, setUsuario] = useState(null);
+
   const onLoginSuccess = (loggedUser) =>{
     setUsuario(loggedUser);
   }
+
+
+const onLogout = ()=>{
+
+    let url = 'http://localhost:8888/auth';
+
+    fetch(url, {
+                  method: 'DELETE',
+                  credentials : 'include'
+               }
+    ).then( response => response.json() )
+     .then( data => {
+                      setUsuario(null);
+                    }
+     )
+
+  }
+
 
   return (
     <>
@@ -26,7 +45,8 @@ function App() {
 
 
     <NavBar user={usuario}
-            handleLoginSuccess = {onLoginSuccess}/>
+            handleLoginSuccess = {onLoginSuccess}
+            handleLogout = {onLogout}/>
 
 
 <Switch>
@@ -34,12 +54,19 @@ function App() {
 children={
   <>
     <Slider/>
-    <ListadoEventos />
+    <ListadoEventos type="eventos"/>
+    
     </>
 }
 />
 
-
+<Route exact path="/miseventos"
+children={
+  <ListadoEventos
+  type="miseventos" 
+  user={usuario}/>
+}
+/>
 
 
 </Switch>

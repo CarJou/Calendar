@@ -5,6 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import calendar from "../calendar.png";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import LoginModal from "./LoginModal";
+import {Link} from "react-router-dom";
 
 const NavBar = (props) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -19,7 +20,10 @@ const NavBar = (props) => {
 
   return (
     <>
+      
       <Navbar sticky="top" style={{ backgroundColor: "#35d6d0" }} expand="lg">
+        
+       <Link to={"/"} className="navbar-brand">
         <img
           style={{ height: "3rem", marginRight: "0.8rem" }}
           src={calendar}
@@ -27,7 +31,7 @@ const NavBar = (props) => {
         <Navbar.Text>
           <strong>Calendar</strong>
         </Navbar.Text>
-
+</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
@@ -38,9 +42,16 @@ const NavBar = (props) => {
                 Iniciar sesión
               </Button>
             : 
+            <>
+            <Link to="/miseventos" className="nav-link">
+             Mis eventos
+            </Link>
+
               <NavDropdown alignRight title={props.user.nombre}>
-                <NavDropdown.Item>Cerrar sesión</NavDropdown.Item>
+                <NavDropdown.Item onClick={props.handleLogout}>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
+
+              </>
             }
           </Nav>
         </Navbar.Collapse>
