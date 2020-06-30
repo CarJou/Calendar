@@ -20,14 +20,14 @@ export default (props) =>
 
 
 
-            <Link to="/events" className="nav-link p-0">
+            
               <Card.Title
                 style={{ fontSize: "2rem" }}
                 className="mb-2 text-center"
               >
                {props.titulo}
               </Card.Title>
-</Link>
+
             
 
             <Card.Text
@@ -52,4 +52,4 @@ export default (props) =>
          
         </Card>
       </Col>
-    
+    //<Link to={"/events/" + props.id} className="nav-link p-0"> 

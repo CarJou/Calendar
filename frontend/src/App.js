@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import NavBar from './components/NavBar';
 import ListadoEventos from './components/ListadoEventos';
 import Slider from './components/Slider';
@@ -14,13 +14,22 @@ import {
 
 
 function App() {
+
+  const [usuario, setUsuario] = useState(null);
+  const onLoginSuccess = (loggedUser) =>{
+    setUsuario(loggedUser);
+  }
+
   return (
     <>
     <Router>
 
 
-    <NavBar user=""/>
+    <NavBar user={usuario}
+            handleLoginSuccess = {onLoginSuccess}/>
 
+
+<Switch>
 <Route exact path='/'
 children={
   <>
@@ -31,17 +40,6 @@ children={
 />
 
 
-    <Switch>
-
-<Route exact path='/events/:id' children={ 
-
-<>
-    <EventsDetail />
-    <ListadoEventos />
-
-    </>
-}
-/>
 
 
 </Switch>
@@ -55,3 +53,14 @@ children={
 }
 
 export default App;
+
+/*
+<Route exact path='/events/:id' children={ 
+
+
+    <EventsDetail />
+    
+
+    
+}
+/>*/

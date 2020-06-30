@@ -1,37 +1,40 @@
+//process.env.BASE_URL = 'http://localhost:8888';
+
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const eventsRoutes = require('./Routes/events_routes');
+const sessionRoutes = require('./Routes/session_routes');
+
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false } ));
+app.use(bodyParser.json());
+
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+
+const auth = require('./auth');
 
 app.use( cors ({
     credentials: true,
-    origin: 
+    origin: 'http://localhost:3000',
+    allowedHeaders: ['Content-Type']
 }
 ))
-const events = [
 
-    {
-        id: 1,
-        titulo: "Reunion",
-        descripcion: "Mañana por la mañana",
-        participantes: "Facu"
-    }, 
-    {
-    id: 2,
-        titulo: "Dentista",
-        descripcion: "Ir al abasto",
-        participantes: "Pablo"
-},
 
-{
-    id: 2,
-        titulo: "Call",
-        descripcion: "Conectarme a la tarde",
-        participantes: "Facu y Diego"
-}
-]
+app.use( session({
+    store  : new FileStore,
+    secret : '123456',
+    resave: false,
+    saveUninitialized: true,
+    name: 'calendar'
+}))
 
-app.get('/events', (req, res) => {
-    res.json(events);
-})
+app.use('/auth', sessionRoutes);
+app.use('/events', eventsRoutes);
+
 
 app.listen(8888, ()=>{console.log('escuchando...')} );

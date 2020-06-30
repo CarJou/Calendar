@@ -1,32 +1,40 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
-import CardEvent from './CardEvent';
+import CardEvent from "./CardEvent";
 
-const ListadoEventos = () =>{
+const ListadoEventos = () => {
+  const [events, setEvents] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost:8888/events")
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data);
+      });
+  }, []
+  );
 
-   const [events, setEvents] = useState([])
+  return (
+    <Row className="m-4">
 
-  useEffect( ()=>{
-     fetch('http://localhost:8888/events');
-  })
+      {
+      events.map( events =>{
+          return(
 
+<CardEvent
+        
+        titulo={events.titulo}
+        descripcion={events.descripcion}
+        participantes={events.participantes}
+        id={events.id}
+      />
+          )
+      }
+      )
+      }
 
-    return(
-
-        <Row className="m-4">
-            
-            <CardEvent titulo="Reunion"
-            descripcion="Mañana por la mañana"
-            id="1"/>
-{/*
-            <CardEvent titulo="Dentista"
-            descripcion="Ir al abasto"/>
-
-            <CardEvent titulo="Call"
-            descripcion="Conectarme por la mañana"
-            participantes="Facu y Diego"/> */}
-        </Row>
-    );
-}
+      
+    </Row>
+  );
+};
 export default ListadoEventos;
