@@ -11,7 +11,13 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
 
-export default (props) => 
+export default (props) =>{ 
+
+  const handleEditClick = ()=>{
+    props.onEditClick( props.id );
+  }
+
+  return( 
       <Col
         md={4}
         lg={3}
@@ -60,7 +66,8 @@ export default (props) =>
          { props.type === 'miseventos' &&
           <Row className="my-2">
           <Col>
-              <Button className="m-2" variant="light">
+              <Button className="m-2" variant="light"
+              onClick={handleEditClick}>
                   <FontAwesomeIcon color="green" icon={faEdit} />
               </Button>
 
@@ -72,3 +79,4 @@ export default (props) =>
          }
         </Card>
       </Col>
+      )}

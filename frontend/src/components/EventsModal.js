@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Swal from 'sweetalert2';
 
 export default props =>{
- 
+
     const [eventsTitulo, setEventsTitulo]   = useState('');
     const [eventsDescripcion, setEventsDescripcion] = useState('');
     const [eventsParticipantes, setEventsParticipantes] = useState('');
+    
 
     const handleEventsTituloChange = event => {
         setEventsTitulo( event.target.value );
@@ -19,6 +21,7 @@ export default props =>{
 
     const handleEventsParticipantesChange = event => {
         setEventsParticipantes( event.target.value );
+
     }
 
     const handleSave = ()=>{
@@ -29,30 +32,73 @@ export default props =>{
         formData.append('eventsDescripcion', eventsDescripcion);
         formData.append('eventsParticipantes', eventsParticipantes);
 
-        fetch('http://localhost:8888/events', {
-            method: 'POST',
+        let url    = 'http://localhost:8888/events';
+        let method = 'POST';
+
+        if ( props.idEvents ){
+            url += '/' + props.idEvents;
+            method = 'PUT';
+        }
+
+        fetch(url, {
+            method: method,
             body: formData,
             credentials: 'include'
         })
         .then( response => response.json() )
         .then( data => {
-            console.log(data);
+            
+            if ( data.status === 'ok' ){
+                props.onEventsSaved(data.message);
+            }
+            else{
+                Swal.fir({
+                    text: data.message,
+                    icon: 'error'
+                })
+              
+            }
+
         })
         .catch( error => {
             console.log('Error');
         })
-    } 
+    }
+
+    useEffect(
+        ()=>{
+            if (props.idEvents){
+                
+                fetch(`http://localhost:8888/events/` + props.idEvents).then(
+                    response => response.json()
+                ).then(
+                    data =>{
+                        setEventsTitulo(data.titulo);
+                        setEventsDescripcion(data.descripcion);
+                        setEventsParticipantes(data.participantes);
+                    }
+                )
+
+            }
+            else{
+                setEventsTitulo('');
+                setEventsDescripcion('');
+                setEventsParticipantes('');
+                
+            }
+        }, [props.idEvents]
+    )
 
     return (
         <Modal show={props.show} onHide={props.handleHide}>
 
-            <Modal.Header  closeButton>
+            <Modal.Header closeButton>
                 <Modal.Title>Nuevo evento</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body >
+            <Modal.Body>
                 
-                <Form >
+                <Form>
 
                     <Form.Group>
                         <Form.Label>Titulo</Form.Label>
@@ -74,13 +120,14 @@ export default props =>{
                         />
                     </Form.Group>
 
+        
+
                     <Form.Group>
-                        <Form.Label >Participantes</Form.Label>
+                        <Form.Label>Participantes</Form.Label>
 
                         <Form.Control type="text"
                                       value={eventsParticipantes}
                                       onChange={handleEventsParticipantesChange}
-                        
                         />
                     </Form.Group>
 

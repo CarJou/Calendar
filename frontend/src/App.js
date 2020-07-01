@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from 'react-router-dom';
 
 
@@ -60,6 +60,7 @@ children={
 }
 />
 
+{ usuario &&
 <Route exact path="/miseventos"
 children={
   <ListadoEventos
@@ -67,7 +68,9 @@ children={
   user={usuario}/>
 }
 />
+}
 
+<Redirect to ={{ pathname: '/'}} />
 
 </Switch>
 
