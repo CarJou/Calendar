@@ -33,17 +33,20 @@ const onShowEventsModal = ()=>{
     Swal.fire({
       text: message,
       icon: "success",
-      button: "Aww yiss!"
+    
     });
   };
 
-  let endpoint = "events";
+  
+
+  const cargarListadoEventos = () => {
+    
+    let endpoint = "events";
 
   if (props.user && props.type === "miseventos") {
     endpoint = "events/user/" + props.user.id;
   }
 
-  const cargarListadoEventos = () => {
     fetch(`http://localhost:8888/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
@@ -58,6 +61,47 @@ const onShowEventsModal = ()=>{
     setShowEventsModal(true);
   };
 
+  const handleDeleteClick = (idEvents) =>{
+        
+    Swal.fire({
+        title: '¿Seguro que quieres eliminar esta publicación?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
+    }).then( result =>{
+        if ( result.value ){
+            
+            fetch(`http://localhost:8888/events/${idEvents}`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include'
+                }
+            ).then(
+                response => response.json()
+            ).then(
+                data =>{
+                    if ( data.status === 'ok' ){
+                        Swal.fire({
+                            text: data.message,
+                            icon: 'success'
+                        });
+
+                        cargarListadoEventos();
+                    }
+                    else{
+                        Swal.fire({
+                            text : data.message,
+                            icon: 'error'
+                        })
+                    }
+                }
+            )
+
+        }
+    })
+
+}
 
   return (
       <>
@@ -78,6 +122,7 @@ const onShowEventsModal = ()=>{
         id={events.id}
         type={props.type}
         onEditClick={handleEditClick}
+        onDeleteClick={handleDeleteClick}
       />
           )
       }

@@ -40,7 +40,7 @@ export default props =>{
             method = 'PUT';
         }
 
-        fetch(url, {
+        fetch( url, {
             method: method,
             body: formData,
             credentials: 'include'

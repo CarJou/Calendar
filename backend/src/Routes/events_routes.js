@@ -112,5 +112,34 @@ router.put('/:id', (req, res) =>{
 })
 
 
+router.delete('/:id', (req, res)=>{
+
+    let sqlDelete = `DELETE FROM events
+                      WHERE events_id = ?`;
+
+    values = [req.params.id];
+
+    conexion.query(sqlDelete, values, (err, result, fields)=>{
+
+        if( err ){
+            res.json(
+                {
+                    status: 'error',
+                    message : 'Error al eliminar la publicación'
+                }
+            )
+        }else{
+            res.json(
+                {
+                    status: 'ok',
+                    message : 'La publicación ha sido eliminada correctamente'
+                }
+            )           
+        }
+
+    })
+
+})
+
  
 module.exports = router;

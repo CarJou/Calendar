@@ -17,21 +17,24 @@ export default (props) =>{
     props.onEditClick( props.id );
   }
 
+  const handleDeleteClick = ()=>{
+    props.onDeleteClick( props.id );
+  }
+
+
   return( 
+
+   
       <Col
         md={4}
         lg={3}
-        xl={2}
-        className="mb-4 text-center d-flex align-items-stretch justify-content-center"
+        xl={3}
+        className="mb-5 text-center d-flex align-items-stretch justify-content-center"
       >
-        <Card>
+        <Card> 
 
-          <Card.Body>
-            { props.type === 'eventos' &&
-             <a className="nav-link p-0 text-right">
-                 <img src={save}></img>
-             </a>
-}
+        <Card.Body>
+           
 
 
             
@@ -71,7 +74,8 @@ export default (props) =>{
                   <FontAwesomeIcon color="green" icon={faEdit} />
               </Button>
 
-              <Button className="m-2" variant="light">
+              <Button className="m-2" variant="light"
+              onClick={handleDeleteClick}>
                   <FontAwesomeIcon color="red" icon={faTrash} />
               </Button>
           </Col>
