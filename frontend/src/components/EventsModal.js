@@ -3,13 +3,16 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
+import calendar from "../calendar.png";
 
 export default props =>{
 
     const [eventsTitulo, setEventsTitulo]   = useState('');
     const [eventsDescripcion, setEventsDescripcion] = useState('');
     const [eventsParticipantes, setEventsParticipantes] = useState('');
-    
+    const [eventsFecha, setEventsFecha] = useState('');
+    const [eventsHora, setEventsHora] = useState('');
+
 
     const handleEventsTituloChange = event => {
         setEventsTitulo( event.target.value );
@@ -24,6 +27,13 @@ export default props =>{
 
     }
 
+    const handleEventsFechaChange = event =>{
+        setEventsFecha( event.target.value);
+    }
+ 
+    const handleEventsHoraChange = event =>{
+        setEventsHora( event.target.value);
+    }
     const handleSave = ()=>{
 
         const formData = new FormData();
@@ -52,7 +62,7 @@ export default props =>{
                 props.onEventsSaved(data.message);
             }
             else{
-                Swal.fir({
+                Swal.fire({
                     text: data.message,
                     icon: 'error'
                 })
@@ -90,6 +100,7 @@ export default props =>{
     )
 
     return (
+        
         <Modal show={props.show} onHide={props.handleHide}>
 
             <Modal.Header closeButton>
@@ -131,24 +142,53 @@ export default props =>{
                         />
                     </Form.Group>
 
+                    <Form.Group>
+                        <Form.Label>Fecha</Form.Label>
+               <Form.Control 
+                       type="date"
+                        name="fecha"
+                        value={eventsFecha}
+                     onChange={handleEventsFechaChange}
+                 
+                />
+</Form.Group>
+             <Form.Group>
+                        <Form.Label>Hora</Form.Label>
+               <Form.Control 
+                       type="time"
+                        name="hora"
+                        value={eventsHora}
+                        onChange={handleEventsHoraChange}
+                        
+                  />
+
+</Form.Group>
+
+
+
                 </Form>
 
-            </Modal.Body>
+
+</Modal.Body>
+            
 
             <Modal.Footer>
                 <Button variant="secondary">
                     Cancelar
                 </Button>
 
-                <Button variant="primary"
+                <Button variant="success"
                         onClick={ handleSave }
+
                 >
+                  
                     Guardar
                 </Button>
 
             </Modal.Footer>
         
         </Modal>
+        
     )
 
 }
