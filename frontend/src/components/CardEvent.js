@@ -61,6 +61,14 @@ export default (props) =>{
             </Card.Text>
 
 
+            <Card.Text
+              style={{ fontSize: "1rem" }}
+              className="mb-2 text-center p-2"
+            >
+             {props.fecha}
+            </Card.Text>
+
+
           </Card.Body>
 
           <Card.Footer className="text-center"></Card.Footer>

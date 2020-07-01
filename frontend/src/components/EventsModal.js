@@ -41,6 +41,7 @@ export default props =>{
         formData.append('eventsTitulo', eventsTitulo);
         formData.append('eventsDescripcion', eventsDescripcion);
         formData.append('eventsParticipantes', eventsParticipantes);
+        formData.append('eventsFecha', eventsFecha);
 
         let url    = 'http://localhost:8888/events';
         let method = 'POST';
@@ -86,6 +87,7 @@ export default props =>{
                         setEventsTitulo(data.titulo);
                         setEventsDescripcion(data.descripcion);
                         setEventsParticipantes(data.participantes);
+                        setEventsFecha(data.fecha);
                     }
                 )
 
@@ -94,7 +96,7 @@ export default props =>{
                 setEventsTitulo('');
                 setEventsDescripcion('');
                 setEventsParticipantes('');
-                
+                setEventsFecha('');
             }
         }, [props.idEvents]
     )
@@ -146,7 +148,7 @@ export default props =>{
                         <Form.Label>Fecha</Form.Label>
                <Form.Control 
                        type="date"
-                        name="fecha"
+                       
                         value={eventsFecha}
                      onChange={handleEventsFechaChange}
                  
@@ -156,7 +158,7 @@ export default props =>{
                         <Form.Label>Hora</Form.Label>
                <Form.Control 
                        type="time"
-                        name="hora"
+                        
                         value={eventsHora}
                         onChange={handleEventsHoraChange}
                         
@@ -192,3 +194,4 @@ export default props =>{
     )
 
 }
+
