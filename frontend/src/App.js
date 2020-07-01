@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import ListadoEventos from './components/ListadoEventos';
 import Slider from './components/Slider';
 import EventsDetail from './components/EventsDetail'
-
+import Calendar from './components/Calendar'
 import {
   BrowserRouter as Router,
   Switch,
@@ -61,13 +61,21 @@ children={
 />
 
 { usuario &&
+
 <Route exact path="/miseventos"
 children={
+<>
+<Calendar user={usuario}/>
   <ListadoEventos
   type="miseventos" 
   user={usuario}/>
+
+  
+  </>
 }
 />
+
+
 }
 
 <Redirect to ={{ pathname: '/'}} />

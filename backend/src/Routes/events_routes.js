@@ -141,5 +141,18 @@ router.delete('/:id', (req, res)=>{
 
 })
 
+
+router.get('/statics/pubscalendar/:id', (req, res) => {
+    
+    let sql = `SELECT events_titulo AS titulo, events_fecha AS start, events_fecha AS end
+                FROM events
+                WHERE user_id = ${req.params.id}`;
+    
+    conexion.query(sql, (err, result, fields)=>{
+        if (err) throw err;
+
+        res.json(result);
+    })
+})
  
 module.exports = router;
