@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'

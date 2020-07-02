@@ -47,12 +47,13 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
 
-    let sqlInsert = `INSERT INTO events(events_titulo, events_descripcion, events_participantes, user_id)
+    let sqlInsert = `INSERT INTO events(events_titulo, events_descripcion, events_participantes, user_id, events_fecha)
     VALUES(
         '${req.body.eventsTitulo}',
         '${req.body.eventsDescripcion}',
         '${req.body.eventsParticipantes}',
-        '${req.session.userId}'
+        '${req.session.userId}',
+        '${req.body.eventsFecha}'
         )`;
 
 conexion.query(sqlInsert, function(err, result, fields){

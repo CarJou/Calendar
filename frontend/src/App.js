@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import NavBar from './components/NavBar';
 import ListadoEventos from './components/ListadoEventos';
 import Slider from './components/Slider';
-import EventsDetail from './components/EventsDetail'
 import Calendar from './components/Calendar'
 import {
   BrowserRouter as Router,

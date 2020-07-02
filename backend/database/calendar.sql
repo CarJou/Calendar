@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2020 a las 22:28:57
+-- Tiempo de generación: 02-07-2020 a las 04:03:04
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -41,7 +41,11 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`events_id`, `events_titulo`, `events_descripcion`, `events_participantes`, `user_id`, `events_fecha`) VALUES
-(1, 'Dentista', 'Avenida Callao', 'Flor', 1, '2020-07-01 03:53:29');
+(1, 'Dentista', 'Avenida Callao', 'Flor', 1, '2020-07-01 03:53:29'),
+(55, 'Terapia', 'Asistir antes de las 15hrs', '', 1, '2020-07-21 22:27:52'),
+(56, 'Reunión', 'Moron 123, esquina Chacabuco', '', 1, '2020-07-09 22:29:31'),
+(57, 'Call', 'Conectarme por meet', '', 1, '2020-07-01 22:30:50'),
+(58, 'Tomar el te con la abuela', 'Encontrarnos en Bonafide de Alvarez Thomas', '', 1, '2020-07-20 22:34:48');
 
 -- --------------------------------------------------------
 
@@ -90,7 +94,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
