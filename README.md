@@ -9,7 +9,7 @@ La API integrada se llama React Big Calendar.
 
 
 ## Cuenta con tres carpetas importantes para poder ejecutar la app de forma correcta:
-### Fronted, backend y base de datos.
+### Fronted, backend y database.
 
 
 # Frontend
