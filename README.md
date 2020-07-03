@@ -1,10 +1,14 @@
 # Calendar
-El proyecto cuenta con un ABM (alta, baja, modificación) 
+El proyecto cuenta con un ABM (alta, baja, modificación)
+
 Distintos usuarios para loguarse. Ej: Sol, 123.
+
 La API integrada se llama React Big Calendar.
 
 
-Este proyecto tiene tres carpetas importantes para poder ejecutar la app de forma correcta:
+
+
+## Cuenta con tres carpetas importantes para poder ejecutar la app de forma correcta:
 ### Fronted, backend y base de datos.
 
 
